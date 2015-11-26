@@ -8,7 +8,7 @@ import vote
 work_level=logging.WARNING
 debug_level=logging.DEBUG
 # set up logging to file - see previous section for more details
-logging.basicConfig(level=debug_level,
+logging.basicConfig(level=work_level,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt='%m-%d %H:%M',
                     filename=connection.base_dir+'log.txt',
