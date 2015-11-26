@@ -35,6 +35,8 @@ def is_full_name(name):
 session=connection.init_db()
 query=session.query(Account)
 for account in query.all():
+	account.account=account.account.strip()
+	account.passwd=account.passwd.strip()
 	web_se=vote.vote_login(account.account,account.passwd)
 	if web_se:
 		vote.auto_vote(web_se)
