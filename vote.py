@@ -35,7 +35,8 @@ def vote_login(username,passwd):
 		s.post(sign_in,data=sign_data)
 		return s
 	except RequestException,e :
-		logging.error(e)
+		logging.exception("RequestException ")
+		return None
 
 def auto_vote(session,account):
 	
@@ -76,6 +77,6 @@ def auto_vote(session,account):
 
 
 
-# s=vote_login('hsh081@126.com','888888'.strip())
-# print s.get('http://mzml.univs.cn:8081/common/issigin').content
-# print s.cookies.keys()
+s=vote_login('hsh081@126.com','888888'.strip())
+print s.get('http://mzml.univs.cn:8081/common/issigin').content
+print s.cookies.keys()
