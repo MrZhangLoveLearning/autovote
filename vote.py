@@ -69,3 +69,5 @@ def auto_vote(session):
 
 
 
+# s=vote_login('hsh081@126.com','888888'.strip())
+# print s.get('http://mzml.univs.cn:8081/common/issigin').content
