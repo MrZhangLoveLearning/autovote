@@ -34,8 +34,8 @@ def vote_login(username,passwd):
 		sign_data['checkcode']=codes.split('?')[1].split('&')[0].split('=')[1]
 		s.post(sign_in,data=sign_data)
 		return s
-	except RequestException,e :
-		logging.exception("RequestException ")
+	except RequestException:
+		logging.exception("Login RequestException :"+username)
 		return None
 
 def auto_vote(session,account):
@@ -54,11 +54,16 @@ def auto_vote(session,account):
 	data3['id']='187'
 	vote.append(data3)	
 	for data in vote:
-		r=session.post('http://mzml.univs.cn:8081/user/addvote',data=data)
-		logging.info(r.content)
-		code=json.loads(r.content)
-		if not code['status'] :
-			logging.warning('fail'+account.account+' : '+account.passwd)
+		try:
+			r=session.post('http://mzml.univs.cn:8081/user/addvote',data=data)
+			logging.info(r.content)
+			code=json.loads(r.content)
+			if not code['status'] :
+				logging.warning('fail'+account.account+' : '+account.passwd)
+		except RequestException:
+			logging.exception("Vote RequestException :"+account.account)
+
+
 
     
 
