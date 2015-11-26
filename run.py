@@ -39,16 +39,18 @@ for account in query.all():
 	if web_se:
 		vote.auto_vote(web_se)
 	elif is_full_name(account.account.strip()):
-		session.delete(account)
+		session.delete(account,web_se)
 		logging.warning('delete '+ac.account)
 		print account.account
 	elif vote.vote_login(account.account.strip()+'@qq.com',account.passwd.strip()):
+		vote.auto_vote(vote.vote_login(account.account.strip()+'@qq.com',account.passwd.strip()),web_se)
 		ac=Account(account=account.account.strip()+'@qq.com',passwd=account.passwd.strip())
 		session.add(ac)
 		session.delete(account)
 		logging.warning('add '+ac.account)
 
 	elif vote.vote_login(account.account.strip()+'@163.com',account.passwd.strip()):
+		vote.auto_vote(vote.vote_login(account.account.strip()+'@163.com',account.passwd.strip()),web_se)
 		ac=Account(account=account.account.strip()+'@163.com',passwd=account.passwd.strip())
 		session.add(ac)
 		session.delete(account)

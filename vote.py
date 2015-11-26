@@ -34,7 +34,7 @@ def vote_login(username,passwd):
 	s.post(sign_in,data=sign_data)
 	return s
 
-def auto_vote(session):
+def auto_vote(session,account):
 	
 	vote=[]
 	data1={}
@@ -51,7 +51,11 @@ def auto_vote(session):
 	vote.append(data3)	
 	for data in vote:
 		r=session.post('http://mzml.univs.cn:8081/user/addvote',data=data)
-		logging.info(r.content) 
+		logging.info(r.content)
+		code=json.loads(r.content)
+		if not code['status'] :
+			logging.warning('fail'+account.account+' : '+account.passwd)
+
     
 
         """
@@ -69,5 +73,6 @@ def auto_vote(session):
 
 
 
-# s=vote_login('hsh081@126.com','888888'.strip())
-# print s.get('http://mzml.univs.cn:8081/common/issigin').content
+s=vote_login('hsh081@126.com','888888'.strip())
+print s.get('http://mzml.univs.cn:8081/common/issigin').content
+print s.cookies.keys()
