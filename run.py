@@ -56,10 +56,10 @@ for account in query.all():
 		session.delete(account)
 		session.commit()
 		logging.warning('add '+ac.account)
-	else:
-		session.delete(account)
-		session.commit()
-		logging.warning('delete '+ac.account)		
+	# else:
+	# 	session.delete(account)
+	# 	session.commit()
+	# 	logging.warning('delete '+ac.account)		
 
 
 
