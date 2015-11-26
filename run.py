@@ -40,26 +40,28 @@ for account in query.all():
 		vote.auto_vote(web_se,account)
 	elif is_full_name(account.account.strip()):
 		session.delete(account,web_se)
+		session.commit()
 		logging.warning('delete '+ac.account)
-		print account.account
 	elif vote.vote_login(account.account.strip()+'@qq.com',account.passwd.strip()):
 		vote.auto_vote(vote.vote_login(account.account.strip()+'@qq.com',account.passwd.strip()),account)
 		ac=Account(account=account.account.strip()+'@qq.com',passwd=account.passwd.strip())
 		session.add(ac)
 		session.delete(account)
+		session.commit()
 		logging.warning('add '+ac.account)
-
 	elif vote.vote_login(account.account.strip()+'@163.com',account.passwd.strip()):
 		vote.auto_vote(vote.vote_login(account.account.strip()+'@163.com',account.passwd.strip()),account)
 		ac=Account(account=account.account.strip()+'@163.com',passwd=account.passwd.strip())
 		session.add(ac)
 		session.delete(account)
+		session.commit()
 		logging.warning('add '+ac.account)
 	else:
 		session.delete(account)
+		session.commit()
 		logging.warning('delete '+ac.account)		
 
-session.commit()
+
 
 
 
