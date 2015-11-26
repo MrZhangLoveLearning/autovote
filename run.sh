@@ -1,4 +1,5 @@
 #!/bin/bash
+# coding=utf-8
 echo "run the auto_vote"
 
 base_dir=~/autovote
