@@ -11,7 +11,7 @@ debug_level=logging.DEBUG
 logging.basicConfig(level=debug_level,
                     format='%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
                     datefmt='%m-%d %H:%M',
-                    filename='log.txt',
+                    filename=connection.base_dir+'log.txt',
                     filemode='a+')
 # define a Handler which writes INFO messages or higher to the sys.stderr
 console = logging.StreamHandler()

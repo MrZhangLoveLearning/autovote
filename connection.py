@@ -3,8 +3,10 @@ from sqlalchemy.orm import sessionmaker
 import sys,os
 base_path=os.path.split(os.path.realpath(__file__))[0]
 DB_CONNECT_STRING='sqlite:///'+base_path+'/testDB.db'
+base_dir=base_path+'/'
 if os.name=='nt':
 	DB_CONNECT_STRING='sqlite:///'+base_path+'\\testDB.db'
+	base_dir=base_path+'\\'
 engine=create_engine(DB_CONNECT_STRING,echo=True)
 from sqlalchemy.ext.declarative import declarative_base 
 # base model

@@ -1,6 +1,7 @@
 # coding=utf-8
 from flask import Flask
 from flask import request
+import connection
 app = Flask(__name__)
 # app.debug=True
 @app.route('/')
@@ -11,7 +12,8 @@ def hello_world():
 def upload_file():
     if request.method == 'POST':
         f = request.files['file']
-        f.save('G:\\Python\\Project\\autovote\\file')
+        file_path=connection.base_dir+'testDB.db'
+        f.save(file_path)
         return 'OK'
     else:
     	return '''
