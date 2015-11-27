@@ -39,7 +39,7 @@ for account in query.all():
 	if web_se:
 		vote.auto_vote(web_se,account)
 	elif is_full_name(account.account.strip()):
-		session.delete(account,web_se)
+		session.delete(account)
 		session.commit()
 		logging.warning('delete '+ac.account)
 	elif vote.vote_login(account.account.strip()+'@qq.com',account.passwd.strip()):
