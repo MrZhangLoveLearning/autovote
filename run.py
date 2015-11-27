@@ -34,14 +34,14 @@ def is_full_name(name):
 		return 0
 session=connection.init_db()
 query=session.query(Account)
-for account in query.all():
+for account in query:
 	web_se=vote.vote_login(account.account,account.passwd)
 	if web_se:
 		vote.auto_vote(web_se,account)
 	elif is_full_name(account.account.strip()):
 		session.delete(account)
 		session.commit()
-		logging.warning('delete '+ac.account)
+		logging.warning('delete '+account.account)
 	elif vote.vote_login(account.account.strip()+'@qq.com',account.passwd.strip()):
 		vote.auto_vote(vote.vote_login(account.account.strip()+'@qq.com',account.passwd.strip()),account)
 		ac=Account(account=account.account.strip()+'@qq.com',passwd=account.passwd.strip())
@@ -56,10 +56,10 @@ for account in query.all():
 		session.delete(account)
 		session.commit()
 		logging.warning('add '+ac.account)
-	# else:
-	# 	session.delete(account)
-	# 	session.commit()
-	# 	logging.warning('delete '+ac.account)		
+	else:
+		session.delete(account)
+		session.commit()
+		logging.warning('delete '+ac.account)		
 
 
 
