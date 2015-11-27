@@ -3,3 +3,4 @@ database
 env
 log.txt
 *.pyc
+nohup.out
