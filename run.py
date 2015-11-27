@@ -59,7 +59,7 @@ for account in query:
 	else:
 		session.delete(account)
 		session.commit()
-		logging.warning('delete '+ac.account)		
+		logging.warning('delete '+account.account)		
 
 
 

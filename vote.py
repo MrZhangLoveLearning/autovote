@@ -1,5 +1,5 @@
 # coding=utf-8
-from requests.exceptions import RequestException 
+from requests.exceptions import RequestException,ConnectionError ,Timeout
 import logging
 from requests import Session
 import json
@@ -34,12 +34,17 @@ def vote_login(username,passwd):
 		sign_data['checkcode']=codes.split('?')[1].split('&')[0].split('=')[1]
 		s.post(sign_in,data=sign_data)
 		return s
+	except ConnectionError,Timeout:
+		logging.exception('Timeout'+username)
+		return 1
 	except RequestException:
 		logging.exception("Login RequestException :"+username)
 		return None
 
 def auto_vote(session,account):
-	
+	if session == 1 :
+		logging.exception(' time out session ')
+		return None
 	vote=[]
 	data1={}
 	data1['type']='1'
@@ -82,6 +87,6 @@ def auto_vote(session,account):
 
 
 
-s=vote_login('hsh081@126.com','888888'.strip())
-print s.get('http://mzml.univs.cn:8081/common/issigin').content
-print s.cookies.keys()
+# s=vote_login('hsh081@126.com','888888'.strip())
+# print s.get('http://mzml.univs.cn:8081/common/issigin').content
+# print s.cookies.keys()
